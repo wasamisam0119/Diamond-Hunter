@@ -15,7 +15,7 @@ public class Map extends Application {
                 Scene scene = new Scene(root,640,640);
                 MainCanvas mainCanvas = new MainCanvas(640, 640);
                 root.getChildren().add(mainCanvas);
-                Parent content = FXMLLoader.load(getClass().getClassLoader().getResource("edit.fxml"));
+        //        Parent content = FXMLLoader.load(getClass().getClassLoader().getResource("edit.fxml"));
                 //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
                 primaryStage.setScene(scene);
                 primaryStage.show();
