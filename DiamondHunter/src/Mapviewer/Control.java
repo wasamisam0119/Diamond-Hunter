@@ -1,23 +1,17 @@
 package Mapviewer;
 
-/**
- * Created by Sam_Du on 16/12/4.
- */
 import java.io.*;
-import java.text.*;
-import java.util.*;
+import java.util.ArrayList;
 
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -25,30 +19,45 @@ public class Control {
     public static final int BOAT = 0;
     public static final int AXE = 1;
     public static final int TILESIZE = 16;
-    @FXML private TextArea xPosition,yPosition;
-    @FXML private Canvas canvas;
-    int x,y;
-    int axeOrboat=-1;
+    public int [][] mapValue;
     private GameMap gameMap;
     private GraphicsContext gContext;
-    private Image map;
-    private int tileWidth = 16;
-    private int tileHeight = 16;
-    public Image image=new Image(getClass().getResourceAsStream("/Sprites/items.gif"));;
-    public int [][] mapValue;
-    PrintWriter pw;
+    int x,y;
+    public Image map=new Image(getClass().getResourceAsStream("/Tilesets/testtileset.gif"));
+    public Image image=new Image(getClass().getResourceAsStream("/Sprites/items.gif"));
     String filename= "ItemMap.data";
-    String itemStr;
-
+    File file;
+    Tuple axe = null;
+    Tuple boat = null;
+    ArrayList<Tuple> items;
+    @FXML private TextArea xPosition,yPosition;
+    @FXML private Canvas canvas;
     public void initialize() {
 
+        try {
+            file= new File(filename);
+            if (!file.exists())
+            {
+                file.createNewFile();
+                items= new ArrayList<Tuple>();
+            }
+            else{
 
-        map = new Image(getClass().getResourceAsStream("/Tilesets/testtileset.gif"));
-        // initialize game map
-        gameMap = new GameMap(tileWidth, tileHeight, map);
-        gameMap.loadMap("/Maps/testmap.map");
-        gContext = canvas.getGraphicsContext2D();
-        gameMap.drawMap(gContext);
+            }
+            items=new ArrayList();
+            // initialize game map
+            gameMap = new GameMap(TILESIZE, TILESIZE, map);
+            gameMap.loadMap("/Maps/testmap.map");
+            gContext = canvas.getGraphicsContext2D();
+            gameMap.drawMap(gContext);
+        }catch (IOException e){
+            e.printStackTrace();
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML public void axePressed() {
@@ -58,36 +67,61 @@ public class Control {
                 System.out.println("X: " + event.getX() + " Y: " + event.getY());
                 x = (int)event.getX()/16;
                 y = (int)event.getY()/16;
+                System.out.println(x);
                 mapValue=gameMap.getMap();
-                //checkAvailable();
-                drawItem(AXE,x,y);
+                int currentPoint=mapValue[x][y];
+                checkAvailable(currentPoint,x,y);
 
             }
         });
-        itemStr="0"+xPosition.getText()+yPosition.getText();
-        axeOrboat=1;
-        write_file(itemStr);
 
     }
 
     @FXML public void boatPressed() {
-        axeOrboat=0;
         //setPosition();
     }
-    public void checkAvailable ()
-    {
 
+    public void checkAvailable (int value,int x, int y) {
+
+        if (value == 20 || value == 22 || value == 21) {
+            ringAlert(Alert.AlertType.ERROR,"This positon is not available!");
+        }
+        else if (axe != null) {
+            drawItem(3, axe.x, axe.y);
+            axe.setPosition(x, y);
+            drawItem(1, x, y);
+        }
+        else {
+
+            drawItem(1, x, y);
+            axe = new Tuple(x,y);
+        }
     }
+
+    public void ringAlert(Alert.AlertType alertType, String message){
+        Alert alert = new Alert(alertType, message);
+        alert.showAndWait();
+    }
+    @FXML public void saveClose(){
+        write_file();
+        System.exit(0);
+    }
+
     public void drawItem(int type, int x, int y ){
         PixelReader pixelReader= image.getPixelReader();
+        PixelReader p = map.getPixelReader();
+
         if (type==1)
         {
             canvas.getGraphicsContext2D().drawImage(new WritableImage(pixelReader, TILESIZE, TILESIZE, TILESIZE, TILESIZE), x * TILESIZE , y * TILESIZE);
         }
-        else
+        else if (type==0)
         {
             canvas.getGraphicsContext2D().drawImage(new WritableImage(pixelReader,0, TILESIZE, TILESIZE, TILESIZE), x * TILESIZE , y * TILESIZE);
 
+        }
+        else{
+            canvas.getGraphicsContext2D().drawImage(new WritableImage(p,TILESIZE,0,TILESIZE,TILESIZE),x*TILESIZE,y*TILESIZE);
         }
     }
 
