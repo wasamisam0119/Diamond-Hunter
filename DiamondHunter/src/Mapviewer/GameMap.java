@@ -3,6 +3,7 @@ package Mapviewer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,6 +58,9 @@ public class GameMap {
                         * tileHeight, tileWidth, tileHeight);
             }
         }
+    }
+    public void drawItem(GraphicsContext gc,Image image){
+        //gc.drawImage(image,);
     }
 
     public int[][] getMap() {
