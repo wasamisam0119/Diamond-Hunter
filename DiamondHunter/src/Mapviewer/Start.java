@@ -4,12 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import java.io.*;
 
 
-public class Map extends Application {
+public class Start extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
