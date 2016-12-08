@@ -2,8 +2,8 @@
     
 ###Using Javafx to implement   
     
-        
-####Usage:
+<h1>heelo</h1>        
+####Usage:   
 ![Example](https://cl.ly/0r1K2x3r3g3R)
 
 There are two buttons Boat and Axe.     
