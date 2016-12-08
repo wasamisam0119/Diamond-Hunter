@@ -7,8 +7,14 @@ package com.neet.DiamondHunter.GameState;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import Mapviewer.Tuple;
 import com.neet.DiamondHunter.Entity.Diamond;
 import com.neet.DiamondHunter.Entity.Item;
 import com.neet.DiamondHunter.Entity.Player;
@@ -41,8 +47,12 @@ public class PlayState extends GameState {
 	// camera position
 	private int xsector;
 	private int ysector;
-	private int sectorSize; 
-	
+	private int sectorSize;
+
+	private ObjectInputStream objectReader;
+	public String filename= "ItemMap.data";
+	public HashMap<Integer,Tuple> hashMap;
+	File file;
 	// hud
 	private Hud hud;
 	
@@ -173,19 +183,44 @@ public class PlayState extends GameState {
 	private void populateItems() {
 		
 		Item item;
-		
-		item = new Item(tileMap);
-		item.setType(Item.AXE);
-		item.setTilePosition(26, 37);
-		items.add(item);
-		
-		item = new Item(tileMap);
-		item.setType(Item.BOAT);
-		item.setTilePosition(12, 4);
-		items.add(item);
-		
+		Tuple tuple;
+		file= new File(filename);
+		if (file.exists())
+		{
+			try {
+				objectReader = new ObjectInputStream(new FileInputStream(file));
+				hashMap = (HashMap<Integer, Tuple>) objectReader.readObject();
+				objectReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (ClassNotFoundException e){
+				e.printStackTrace();
+			}
+			if (hashMap.containsKey(0))
+			{
+				tuple=hashMap.get(0);
+				item=new Item(tileMap);
+				item.setType((Item.BOAT));
+				item.setTilePosition(tuple.x,tuple.y);
+				items.add(item);
+			}
+			if (hashMap.containsKey(1))
+			{
+				tuple=hashMap.get(1);
+				item=new Item(tileMap);
+				item.setType((Item.AXE));
+				item.setTilePosition(tuple.x,tuple.y);
+				items.add(item);
+			}
+		}
+
+
+
 	}
-	
+//	private void read_item(){
+
+//	}
 	public void update() {
 		
 		// check keys
