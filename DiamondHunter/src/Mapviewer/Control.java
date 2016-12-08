@@ -81,7 +81,6 @@ public class Control {
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("X: " + event.getX() + " Y: " + event.getY());
                 x = (int) event.getX() / 16;
                 y = (int) event.getY() / 16;
                 mapValue = gameMap.getMap();
@@ -160,6 +159,7 @@ public class Control {
         alert.showAndWait();
     }
 
+    /* save the change and write items object into the file using a Serializable hashmap.*/
     @FXML
     public void saveClose() {
         if (boat != null) {
@@ -179,21 +179,24 @@ public class Control {
         System.exit(0);
     }
 
+    /*draw the item on canvas, using pixelReader to cut the picture*/
     public void drawItem(int type, int x, int y) {
         PixelReader pixelReader = image.getPixelReader();
         PixelReader p = map.getPixelReader();
 
-        if (type == 1) {
+        if (type == AXE) {
             canvas.getGraphicsContext2D().drawImage(new WritableImage(pixelReader, TILESIZE, TILESIZE, TILESIZE, TILESIZE), x * TILESIZE, y * TILESIZE);
         }
-        else if (type == 0) {
+        else if (type == BOAT) {
             canvas.getGraphicsContext2D().drawImage(new WritableImage(pixelReader, 0, TILESIZE, TILESIZE, TILESIZE), x * TILESIZE, y * TILESIZE);
         }
-        else {
+        //draw a grass block to replace when moving the axe or boat
+        else{
             canvas.getGraphicsContext2D().drawImage(new WritableImage(p, TILESIZE, 0, TILESIZE, TILESIZE), x * TILESIZE, y * TILESIZE);
         }
     }
 
+    /*implements the object writer*/
     public void objectWriter(File file) {
         try {
             objectWriter = new ObjectOutputStream(new FileOutputStream(file));
