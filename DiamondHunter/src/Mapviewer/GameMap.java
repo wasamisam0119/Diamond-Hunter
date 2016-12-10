@@ -2,12 +2,15 @@ package Mapviewer;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/*this class is mainly to load and draw the whole map,
+  the idea is basically referenced from the writer but using Javafx.
+  I read the official documentation and find javafx Canvas Class,
+  which has some functions to operate and modify graphics.
+  */
 
 public class GameMap {
     private int tileWidth;
@@ -16,15 +19,16 @@ public class GameMap {
     private int numCols;
     private int numRows;
     private Image tileimage;
-    private int [][] map;
+    private int[][] map;
 
-    public GameMap(int tileWidth,int tileHeight, Image i){
+    public GameMap(int tileWidth, int tileHeight, Image i) {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.tileimage = i;
         cols = (int) (i.getWidth() / tileWidth);
     }
-    public void loadMap(String s){
+
+    public void loadMap(String s) {
         try {
 
             InputStream in = getClass().getResourceAsStream(s);
@@ -36,17 +40,18 @@ public class GameMap {
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];
             String delims = "\\s+";
-            for(int row = 0; row < numRows; row++) {
+            for (int row = 0; row < numRows; row++) {
                 String line = br.readLine();
                 String[] tokens = line.split(delims);
-                for(int col = 0; col < numCols; col++) {
+                for (int col = 0; col < numCols; col++) {
                     map[row][col] = Integer.parseInt(tokens[col]);
                 }
             }
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void drawMap(GraphicsContext gc) {
         int mapWidth = map[0].length;
         int mapHeight = map.length;
@@ -58,9 +63,6 @@ public class GameMap {
                         * tileHeight, tileWidth, tileHeight);
             }
         }
-    }
-    public void drawItem(GraphicsContext gc,Image image){
-        //gc.drawImage(image,);
     }
 
     public int[][] getMap() {

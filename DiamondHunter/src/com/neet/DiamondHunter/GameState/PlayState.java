@@ -50,7 +50,7 @@ public class PlayState extends GameState {
 	private int sectorSize;
 
 	private ObjectInputStream objectReader;
-	public String filename= "ItemMap.data";
+	//public String filename= "/Resources/Item.data";
 	public HashMap<Integer,Tuple> hashMap;
 	File file;
 	// hud
@@ -184,7 +184,10 @@ public class PlayState extends GameState {
 		
 		Item item;
 		Tuple tuple;
-		file= new File(filename);
+		if(getClass().getResource("/Item.data")!=null)
+		{
+			file = new File(getClass().getResource("/Item.data").getPath());
+		}
 		if (file.exists())
 		{
 			try {
@@ -202,7 +205,7 @@ public class PlayState extends GameState {
 				tuple=hashMap.get(0);
 				item=new Item(tileMap);
 				item.setType((Item.BOAT));
-				item.setTilePosition(tuple.x,tuple.y);
+				item.setTilePosition(tuple.y,tuple.x);
 				items.add(item);
 			}
 			if (hashMap.containsKey(1))
@@ -210,7 +213,7 @@ public class PlayState extends GameState {
 				tuple=hashMap.get(1);
 				item=new Item(tileMap);
 				item.setType((Item.AXE));
-				item.setTilePosition(tuple.x,tuple.y);
+				item.setTilePosition(tuple.y,tuple.x);
 				items.add(item);
 			}
 		}

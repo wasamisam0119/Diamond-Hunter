@@ -26,7 +26,6 @@ public class Control {
     private GraphicsContext gContext;
     private ObjectInputStream objectReader;
     private ObjectOutputStream objectWriter;
-    String filename = "ItemMap.data";
     File file;
     Tuple axe = null;   //store the item's positon
     Tuple boat = null;
@@ -46,12 +45,13 @@ public class Control {
         gContext = canvas.getGraphicsContext2D();
         //draw the map
         gameMap.drawMap(gContext);
-        file = new File(filename);
-        //load the item file
+        file = new File("Item.data");
         if (!file.exists()) {
+
             items = new HashMap<Integer, Tuple>();
         }
         else {
+            //load the item file
             try {
                 objectReader = new ObjectInputStream(new FileInputStream(file));
                 items = (HashMap<Integer, Tuple>) objectReader.readObject();
@@ -116,8 +116,7 @@ public class Control {
         if (value == 20 || value == 22 || value == 21) {        //item can not set on the barrier
 
             ringAlert(Alert.AlertType.ERROR, "This positon is not available!");
-        }
-        else {
+        } else {
 
             if (type == AXE) {
                 if (axe != null) {     //if already have axe, change the positon and draw the axe again
@@ -125,21 +124,18 @@ public class Control {
                     axe.setPosition(x, y);
                     displayCoordinate();
                     drawItem(1, x, y);
-                }
-                else {                  //if do not have item, add one to the axe object and draw
+                } else {                  //if do not have item, add one to the axe object and draw
                     drawItem(1, x, y);
                     axe = new Tuple(x, y);
                     displayCoordinate();
                 }
-            }
-            else {
+            } else {
                 if (boat != null) {     //if already have boat, change the positon and draw the axe again
                     drawItem(3, boat.x, boat.y);
                     boat.setPosition(x, y);
                     displayCoordinate();
                     drawItem(0, x, y);
-                }
-                else {                  //if do not have item, add one to the boat object and draw
+                } else {                  //if do not have item, add one to the boat object and draw
                     drawItem(0, x, y);
                     boat = new Tuple(x, y);
                     displayCoordinate();
@@ -191,7 +187,7 @@ public class Control {
             canvas.getGraphicsContext2D().drawImage(new WritableImage(pixelReader, 0, TILESIZE, TILESIZE, TILESIZE), x * TILESIZE, y * TILESIZE);
         }
         //draw a grass block to replace when moving the axe or boat
-        else{
+        else {
             canvas.getGraphicsContext2D().drawImage(new WritableImage(p, TILESIZE, 0, TILESIZE, TILESIZE), x * TILESIZE, y * TILESIZE);
         }
     }
@@ -203,7 +199,7 @@ public class Control {
             objectWriter.writeObject(items);
             objectWriter.close();
         } catch (IOException ioe) {
-            System.err.println("cannot write " + filename + " for writing!");
+            System.err.println("cannot write Item.data for writing!");
             ioe.printStackTrace();
         }
 

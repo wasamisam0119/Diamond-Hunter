@@ -60,11 +60,11 @@ public class TileMap {
 		
 		try {
 
+			System.out.println();
 			tileset = ImageIO.read(
 				getClass().getResourceAsStream(s)
 			);
 			numTilesAcross = tileset.getWidth() / tileSize;
-			System.out.println(numTilesAcross);
 			tiles = new Tile[2][numTilesAcross];
 			
 			BufferedImage subimage;
@@ -224,7 +224,6 @@ public class TileMap {
 				
 				int rc = map[row][col];
 				int r = rc / numTilesAcross;
-				System.out.println(numTilesAcross);
 				int c = rc % numTilesAcross;
 				
 				g.drawImage(

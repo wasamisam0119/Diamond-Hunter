@@ -7,7 +7,6 @@ package com.neet.DiamondHunter.Entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import com.neet.DiamondHunter.Manager.Content;
 import com.neet.DiamondHunter.TileMap.TileMap;
 

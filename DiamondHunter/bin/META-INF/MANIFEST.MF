@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: <?xml version="1.0" encoding="UTF-8"?> <classpath> 	<class
+ pathentry kind="src" path="Mapviewer"/> </classpath>
+Main-Class: Mapviewer.Start
+

@@ -2,8 +2,8 @@ package Mapviewer;
 
 import java.io.Serializable;
 
-/**
- * Created by Sam_Du on 16/12/7.
+/* Tuple object mainly used for store the coordinates of item and implements the Serializable,
+   which will be written into files later.
  */
 public class Tuple implements Serializable{
     public int x;
