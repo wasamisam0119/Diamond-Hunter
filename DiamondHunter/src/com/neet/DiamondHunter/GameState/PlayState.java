@@ -186,10 +186,8 @@ public class PlayState extends GameState {
 		Tuple tuple;
 		if(getClass().getResource("/Item.data")!=null)
 		{
+			System.out.println(getClass().getResource("/Item.data").getPath());
 			file = new File(getClass().getResource("/Item.data").getPath());
-		}
-		if (file.exists())
-		{
 			try {
 				objectReader = new ObjectInputStream(new FileInputStream(file));
 				hashMap = (HashMap<Integer, Tuple>) objectReader.readObject();
