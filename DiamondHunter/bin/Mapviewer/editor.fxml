@@ -12,11 +12,11 @@
 
 <BorderPane prefHeight="760.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Mapviewer.Control">
    <bottom>
-      <HBox prefHeight="120.0" prefWidth="640.0" style="-fx-background-color: orange;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="640.0" style="-fx-background-color: orange;">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#boatPressed" prefHeight="50.0" prefWidth="170.0" text="Boat" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#boatPressed" prefHeight="40.0" prefWidth="140.0" text="Boat" textAlignment="CENTER">
                <HBox.margin>
-                  <Insets bottom="10.0" left="30.0" right="50.0" top="30.0" />
+                  <Insets bottom="20.0" left="30.0" right="50.0" top="30.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="17.0" />
@@ -28,7 +28,7 @@
                </HBox.margin>
                <children>
                   <TextArea fx:id="yPosition" layoutX="92.0" layoutY="-12.0" prefHeight="38.0" prefWidth="65.0" />
-                  <Button layoutX="21.0" layoutY="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" text="Save &amp; Exit" onAction="#saveClose" textAlignment="CENTER">
+                  <Button layoutX="90.0" layoutY="45.0" mnemonicParsing="false" onAction="#saveClose" prefHeight="35.0" prefWidth="107.0" text="Save" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -36,12 +36,20 @@
                         <DropShadow blurType="TWO_PASS_BOX" spread="0.32" />
                      </effect>
                   </Button>
-                  <TextArea layoutX="-7.0" layoutY="-12.0" prefHeight="38.0" prefWidth="65.0" fx:id="xPosition" />
+                  <TextArea layoutX="4.0" layoutY="-12.0" prefHeight="38.0" prefWidth="65.0" fx:id="xPosition" />
+                  <Button layoutX="-37.0" layoutY="45.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="107.0" onAction="#startGame" text="StartGame" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <effect>
+                        <DropShadow spread="0.32" />
+                     </effect>
+                  </Button>
                </children>
             </Pane>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#axePressed" prefHeight="50.0" prefWidth="170.0" text="Axe" textAlignment="CENTER">
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#axePressed" prefHeight="40.0" prefWidth="140.0" text="Axe" textAlignment="CENTER">
                <HBox.margin>
-                  <Insets bottom="10.0" left="50.0" right="30.0" top="30.0" />
+                  <Insets bottom="20.0" left="50.0" right="30.0" top="30.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="17.0" />

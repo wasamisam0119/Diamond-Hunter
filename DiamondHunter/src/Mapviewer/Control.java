@@ -3,6 +3,7 @@ package Mapviewer;
 import java.io.*;
 import java.util.HashMap;
 
+import com.neet.DiamondHunter.Main.Game;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -155,6 +156,12 @@ public class Control {
         alert.showAndWait();
     }
 
+    /*start the Main Game*/
+    @FXML
+    public void startGame(){
+        Game.main(null);
+    }
+
     /* save the change and write items object into the file using a Serializable hashmap.*/
     @FXML
     public void saveClose() {
@@ -172,7 +179,6 @@ public class Control {
             }
             objectWriter(file);
         }
-        System.exit(0);
     }
 
     /*draw the item on canvas, using pixelReader to cut the picture*/
