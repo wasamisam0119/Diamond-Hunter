@@ -11,13 +11,15 @@
 
 <h4>Usage:</h4>
 
-<p><img src="https://i.imgsafe.org/9ea834dba9.png" alt="Example" /></p>
+<p><img src="https://i.imgsafe.org/03f2d5d5d5.png" alt="Example" /></p>
 
 <p>There are two buttons Boat and Axe.   <br/>
 1. Firstly, chose a item that you want to set, just simply click on it.   <br/>
 2. Click on the map, and the item will be set if the place is available and you can only set one item at each type, you can not set two axes. The coordinates of the item on be displayed on the screen.       <br/>
-3. Press Save&amp;Exit Button and the application will exit. <br/>
-4. If you run the game, the item will appear on where you set it.</p>
+3. Press Save Button and the application will save the change. <br/>
+4. Then Click StartGme Button to start the main game.  <br/ >
+5. If you run the game, the item will appear on where you set it.</p>     
+
 
 <p><strong>Note:</strong>  If you open the applicaiton again, it will read and display the item you set last time.</p>
 
